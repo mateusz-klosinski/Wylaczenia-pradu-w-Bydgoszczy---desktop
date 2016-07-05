@@ -28,6 +28,11 @@ namespace EneaWPF
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public string Location { get; set; }
+        public string Date { get;  set; }
+        public string Time { get;  set; }
+        public string Details { get; set; }
+
 
 
         private void OnPropertyChanged(string propertyName)
@@ -81,6 +86,20 @@ namespace EneaWPF
             OnPropertyChanged("TommorowDisconnectionList");
             OnPropertyChanged("ElseDisconnectionList");
         }
+
+        public void updateDetails(Disconnection disconnection)
+        {
+            Location = disconnection.ToString();
+            Date = disconnection.ConvertDate().ToLongDateString();
+            Time = disconnection.Time;
+            Details = disconnection.Details;
+            OnPropertyChanged("Location");
+            OnPropertyChanged("Date");
+            OnPropertyChanged("Time");
+            OnPropertyChanged("Details");
+        }
+
+
 
 
         private void formatList()

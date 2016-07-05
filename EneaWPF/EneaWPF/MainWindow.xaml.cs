@@ -27,16 +27,55 @@ namespace EneaWPF
             InitializeComponent();
             manager = new AppManager();
             grid.DataContext = manager;
+            manager.UpdateData();
         }
 
         private void CheckForElectricy_Click(object sender, RoutedEventArgs e)
         {
-            manager.UpdateData();
+
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
             manager.TestList();
         }
+
+        private void todayListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Disconnection disconnection = todayListBox.SelectedItem as Disconnection;
+            if (disconnection != null)
+                manager.updateDetails(disconnection);
+        }
+
+        private void tommorowListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Disconnection disconnection = tommorowListBox.SelectedItem as Disconnection;
+            if (disconnection != null)
+                manager.updateDetails(disconnection);
+        }
+
+        private void elseListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Disconnection disconnection = elseListBox.SelectedItem as Disconnection;
+            if (disconnection != null)
+                manager.updateDetails(disconnection);
+        }
+
+        private void todayListBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            todayListBox.SelectedItem = null;
+        }
+
+        private void tommorowListBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            tommorowListBox.SelectedItem = null;
+        }
+
+        private void elseListBox_MouseLeave(object sender, MouseEventArgs e)
+        {
+            elseListBox.SelectedItem = null;
+        }
+
+
     }
 }

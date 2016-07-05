@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EneaWPF"
         mc:Ignorable="d"
-        Title="Przerwy w dostawach prądu - Enea" Height="435" Width="800">
+        Title="Przerwy w dostawach prądu - Enea" Height="500" Width="800" MinHeight="500" MinWidth="470" Background="#FFD7D7D8">
+
+
+
     <Grid x:Name="grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -17,26 +20,22 @@
             <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
         <StackPanel Margin="10,10,10,10"  Grid.RowSpan="2">
-            <TextBlock HorizontalAlignment="Center">Planowane wyłączenia w Bydgoszczy</TextBlock>
-            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0">Dzisiaj</TextBlock>
-            <ListView x:Name="todayListBox" ItemsSource="{Binding TodayList}" Margin="10,0,10,10" Background="White" Height="100" />
-            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0">Jutro</TextBlock>
-            <ListView x:Name="tommorowListBox" ItemsSource="{Binding TommorowList}" Margin="10,0,10,10" Background="White" Height="100" />
-            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0">W inne dni</TextBlock>
-            <ListView x:Name="elseListBox" ItemsSource="{Binding ElseList}" Margin="10,0,10,10" Background="White" Height="100" />
+            <TextBlock HorizontalAlignment="Center" FontWeight="Heavy">Planowane wyłączenia w Bydgoszczy</TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" FontWeight="Heavy">Dzisiaj</TextBlock>
+            <ListView x:Name="todayListBox" ItemsSource="{Binding TodayList}" Margin="10,0,10,10" Background="White" Height="100" SelectionChanged="todayListBox_SelectionChanged" MouseLeave="todayListBox_MouseLeave" />
+            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" FontWeight="Heavy">Jutro</TextBlock>
+            <ListView x:Name="tommorowListBox" ItemsSource="{Binding TommorowList}" Margin="10,0,10,10" Background="White" Height="100" SelectionChanged="tommorowListBox_SelectionChanged" MouseLeave="tommorowListBox_MouseLeave"  />
+            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" FontWeight="Heavy">W inne dni</TextBlock>
+            <ListView x:Name="elseListBox" ItemsSource="{Binding ElseList}" Margin="10,0,10,10" Background="White" Height="100" SelectionChanged="elseListBox_SelectionChanged" MouseLeave="elseListBox_MouseLeave"  />
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Margin="10,10,10,10">
-            <TextBlock HorizontalAlignment="Center" Margin="0,0,0,5">Wybierz dzielnicę Bydgoszczy</TextBlock>
-            <ComboBox Margin="0,0,0,10" BorderBrush="White" >
-                <ComboBox.Background>
-                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                        <GradientStop Color="#FFF0F0F0" Offset="0"/>
-                        <GradientStop Color="White" Offset="1"/>
-                    </LinearGradientBrush>
-                </ComboBox.Background>
-            </ComboBox>
-            <Button x:Name="button" Content="Do testów" Click="button_Click"/>
+
+        <StackPanel Grid.Column="1" Margin="10,10,10,10" Orientation="Vertical">
+            <TextBlock Grid.Column="1" FontWeight="Heavy" HorizontalAlignment="Center">Szczegóły</TextBlock>
+            <TextBlock Margin="10,10" Text="{Binding Location}" Height="Auto" TextWrapping="Wrap" Background="#FFF0F0F0"></TextBlock>
+            <TextBlock Margin="10,10" Text="{Binding Date}" Height="Auto" TextWrapping="WrapWithOverflow" Background="#FFF0F0F0"></TextBlock>
+            <TextBlock Margin="10,10" Text="{Binding Time}" Height="Auto" Width="170" TextWrapping="Wrap" Background="#FFF0F0F0"></TextBlock>
+            <TextBlock Margin="10,10" Text="{Binding Details}" Height="Auto" Width="180" TextWrapping="Wrap" Background="#FFF0F0F0"></TextBlock>
         </StackPanel>
 
         <Button  Grid.Column="1" Grid.Row="1" Margin="10,10,10,10" x:Name="CheckForElectricy" Content="Sprawdź przerwy w dostawach prądu" 
