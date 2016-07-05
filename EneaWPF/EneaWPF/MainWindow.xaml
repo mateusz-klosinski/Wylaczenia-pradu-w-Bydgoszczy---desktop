@@ -9,7 +9,7 @@
 
 
 
-    <Grid x:Name="grid">
+    <Grid x:Name="grid" Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="300"/>
@@ -19,19 +19,19 @@
             <RowDefinition/>
             <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
-        <StackPanel Margin="10,10,10,10"  Grid.RowSpan="2">
-            <TextBlock HorizontalAlignment="Center" FontWeight="Heavy">Planowane wyłączenia w Bydgoszczy</TextBlock>
-            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" FontWeight="Heavy">Dzisiaj</TextBlock>
+        <StackPanel Margin="10,10,10,10"  Grid.RowSpan="2" Background="#FFA2CCFF">
+            <TextBlock HorizontalAlignment="Center" FontWeight="Bold" FontStyle="Italic">Planowane wyłączenia w Bydgoszczy</TextBlock>
+            <TextBlock HorizontalAlignment="Stretch" Margin="10,0,10,0" FontWeight="Heavy" Background="#FF76ABEA">Dzisiaj</TextBlock>
             <ListView x:Name="todayListBox" ItemsSource="{Binding TodayList}" Margin="10,0,10,10" Background="White" Height="100" SelectionChanged="todayListBox_SelectionChanged" MouseLeave="todayListBox_MouseLeave" />
-            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" FontWeight="Heavy">Jutro</TextBlock>
+            <TextBlock HorizontalAlignment="Stretch" Margin="10,0,10,0" FontWeight="Heavy" Background="#FF76ABEA">Jutro</TextBlock>
             <ListView x:Name="tommorowListBox" ItemsSource="{Binding TommorowList}" Margin="10,0,10,10" Background="White" Height="100" SelectionChanged="tommorowListBox_SelectionChanged" MouseLeave="tommorowListBox_MouseLeave"  />
-            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" FontWeight="Heavy">W inne dni</TextBlock>
+            <TextBlock HorizontalAlignment="Stretch" Margin="10,0,10,0" FontWeight="Heavy" Background="#FF76ABEA">W inne dni</TextBlock>
             <ListView x:Name="elseListBox" Grid.RowSpan="2" ItemsSource="{Binding ElseList}" Margin="10,0,10,10" Background="White" Height="100" SelectionChanged="elseListBox_SelectionChanged" MouseLeave="elseListBox_MouseLeave"  />
         </StackPanel>
 
 
-        <StackPanel Grid.Column="1" Margin="10,10,10,10" Orientation="Vertical">
-            <TextBlock Grid.Column="1" FontWeight="Heavy" HorizontalAlignment="Center">Szczegóły</TextBlock>
+        <StackPanel Grid.Column="1" Margin="10,10,10,10" Orientation="Vertical" Background="#FFA2CCFF">
+            <TextBlock Grid.Column="1" FontWeight="Bold" FontStyle="Italic" HorizontalAlignment="Center">Szczegóły</TextBlock>
             <TextBlock Margin="10,5" Text="{Binding Location}" Height="Auto" TextWrapping="Wrap" Background="#FFF0F0F0"></TextBlock>
             <TextBlock Margin="10,5" Text="{Binding Date}" Height="Auto" TextWrapping="WrapWithOverflow" Background="#FFF0F0F0"></TextBlock>
             <TextBlock Margin="10,5" Text="{Binding Time}" Height="Auto"  TextWrapping="Wrap" Background="#FFF0F0F0"></TextBlock>
@@ -47,7 +47,16 @@
                 <Run>Do następnej aktualizacji:</Run>
                 <Run FontWeight="Normal" Text="{Binding ToNextUpdate, Mode=OneWay}"></Run>
             </TextBlock>
+            <TextBlock FontStyle="Italic" FontWeight="Bold">Subskrypcja SMS: </TextBlock>
+            <TextBlock Foreground="Green" Text=" WŁĄCZONA" Visibility="Collapsed"></TextBlock>
+            <TextBlock Foreground="Red" Text=" WYŁĄCZONA"></TextBlock>
         </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,0,10,10">
+            <Button Width="100" Height="40" Margin="0,0,80,0">Podłącz telefon</Button>
+            <Button Width="100" Height="40" IsEnabled="False">Subskrybuj</Button>
+        </StackPanel>
+
 
 
     </Grid>
