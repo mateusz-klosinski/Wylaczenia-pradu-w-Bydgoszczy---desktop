@@ -33,5 +33,10 @@ namespace EneaWPF
         {
             controller.UpdateData();
         }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            controller.TestList();
+        }
     }
 }

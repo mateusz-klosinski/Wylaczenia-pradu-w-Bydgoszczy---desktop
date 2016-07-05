@@ -63,6 +63,7 @@ namespace EneaWPF
             await createFileFromString();
             await createListFromFile();
             removeUnnecesaryInformationFromList();
+            makeMagicWithList();
             test = createListToShow();
             OnPropertyChanged("DataList");
         }
@@ -101,8 +102,11 @@ namespace EneaWPF
 
         private void makeMagicWithList()
         {
-            List<string> copiedList = downloadedDataList;
+            List<string> copiedList = new List<string>();
+            copiedList.AddRange(downloadedDataList);
             downloadedDataList.Clear();
+
+
             foreach(string line in copiedList)
             {
                 downloadedDataList.Add(TagRemoveHelper.CutTagsFromHtml(line));
@@ -115,14 +119,22 @@ namespace EneaWPF
             string importantLine = string.Empty;
             foreach (string line in downloadedDataList)
             {
-                if (line.Contains("Wyłączenia w rejonie dystrybucji"))
+                if (line.Contains("Wyłączenia w Rejonie Dystrybucji Bydgoszcz"))
                 {
                     importantLine = line;
                 }
             }
-            downloadedDataList.RemoveRange(0, (downloadedDataList.IndexOf(importantLine) + 1));
+            downloadedDataList.RemoveRange(0, downloadedDataList.IndexOf(importantLine));
         }
 
+        public void TestList()
+        {
+            foreach (string line in downloadedDataList)
+            {
+                Console.WriteLine(line);
+            }
+
+        }
 
 
         private ObservableCollection<string> createListToShow()
