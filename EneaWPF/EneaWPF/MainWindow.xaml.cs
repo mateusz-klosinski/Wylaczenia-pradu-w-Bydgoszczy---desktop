@@ -98,6 +98,14 @@ namespace EneaWPF
             elseListBox.SelectedItem = null;
         }
 
+        private void PlugInDevice_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
+
+        private void StartSubscription_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

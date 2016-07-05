@@ -9,7 +9,7 @@
 
 
 
-    <Grid x:Name="grid" Background="White">
+    <Grid x:Name="grid" Background="#FFC8DCFF">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="300"/>
@@ -22,21 +22,21 @@
         <TextBlock x:Name="downloadingTextBlock" VerticalAlignment="Center" TextAlignment="Center" FontSize="40">Pobieranie danych.</TextBlock>
         <StackPanel x:Name="mainStackPanel" Margin="10,10,10,10"  Grid.RowSpan="2" Background="#FFA2CCFF" Visibility="Collapsed">
             <TextBlock HorizontalAlignment="Center" FontWeight="Bold" FontStyle="Italic">Planowane wyłączenia w Bydgoszczy</TextBlock>
-            <TextBlock HorizontalAlignment="Stretch" Margin="10,0,10,0" FontWeight="Heavy" Background="#FF76ABEA">Dzisiaj</TextBlock>
+            <TextBlock HorizontalAlignment="Stretch" Padding="5,5,0,0" Margin="10,0,10,0" FontWeight="Heavy" Background="#FF76ABEA">Dzisiaj</TextBlock>
             <ListView x:Name="todayListBox" ItemsSource="{Binding TodayList}" Margin="10,0,10,10" Background="White" Height="100" SelectionChanged="todayListBox_SelectionChanged" MouseLeave="todayListBox_MouseLeave" />
-            <TextBlock HorizontalAlignment="Stretch" Margin="10,0,10,0" FontWeight="Heavy" Background="#FF76ABEA">Jutro</TextBlock>
+            <TextBlock HorizontalAlignment="Stretch" Padding="5,5,0,0" Margin="10,0,10,0" FontWeight="Heavy" Background="#FF76ABEA">Jutro</TextBlock>
             <ListView x:Name="tommorowListBox" ItemsSource="{Binding TommorowList}" Margin="10,0,10,10" Background="White" Height="100" SelectionChanged="tommorowListBox_SelectionChanged" MouseLeave="tommorowListBox_MouseLeave"  />
-            <TextBlock HorizontalAlignment="Stretch" Margin="10,0,10,0" FontWeight="Heavy" Background="#FF76ABEA">W inne dni</TextBlock>
+            <TextBlock HorizontalAlignment="Stretch" Padding="5,5,0,0" Margin="10,0,10,0" FontWeight="Heavy" Background="#FF76ABEA">W inne dni</TextBlock>
             <ListView x:Name="elseListBox" Grid.RowSpan="2" ItemsSource="{Binding ElseList}" Margin="10,0,10,10" Background="White" Height="100" SelectionChanged="elseListBox_SelectionChanged" MouseLeave="elseListBox_MouseLeave"  />
         </StackPanel>
 
 
         <StackPanel Grid.Column="1" Margin="10,10,10,10" Orientation="Vertical" Background="#FFA2CCFF">
             <TextBlock Grid.Column="1" FontWeight="Bold" FontStyle="Italic" HorizontalAlignment="Center">Szczegóły</TextBlock>
-            <TextBlock Margin="10,5" Text="{Binding Location}" Height="Auto" TextWrapping="Wrap" Background="#FFF0F0F0"></TextBlock>
-            <TextBlock Margin="10,5" Text="{Binding Date}" Height="Auto" TextWrapping="WrapWithOverflow" Background="#FFF0F0F0"></TextBlock>
-            <TextBlock Margin="10,5" Text="{Binding Time}" Height="Auto"  TextWrapping="Wrap" Background="#FFF0F0F0"></TextBlock>
-            <TextBlock Margin="10,5" Text="{Binding Details}" Height="Auto"  TextWrapping="Wrap" Background="#FFF0F0F0"></TextBlock>
+            <TextBlock Margin="10,5" Padding="5,5,5,5" Text="{Binding Location}" Height="Auto" TextWrapping="Wrap" Background="#FFF0F0F0"></TextBlock>
+            <TextBlock Margin="10,5" Padding="5,5,5,5" Text="{Binding Date}" Height="Auto" TextWrapping="WrapWithOverflow" Background="#FFF0F0F0"></TextBlock>
+            <TextBlock Margin="10,5" Padding="5,5,5,5" Text="{Binding Time}" Height="Auto"  TextWrapping="Wrap" Background="#FFF0F0F0"></TextBlock>
+            <TextBlock Margin="10,5" Padding="5,5,5,5" Text="{Binding Details}" Height="Auto"  TextWrapping="Wrap" Background="#FFF0F0F0"></TextBlock>
         </StackPanel>
 
         <StackPanel Grid.Row="1" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.ColumnSpan="2" Background="#FFF0F0F0">
@@ -54,8 +54,8 @@
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,0,10,10">
-            <Button Width="100" Height="40" Margin="0,0,80,0">Podłącz telefon</Button>
-            <Button Width="100" Height="40" IsEnabled="False">Subskrybuj</Button>
+            <Button x:Name="PlugInDevice" Width="100" Height="40" Margin="0,0,80,0" Click="PlugInDevice_Click">Podłącz telefon</Button>
+            <Button x:Name="StartSubscription" Width="100" Height="40" IsEnabled="False" Click="StartSubscription_Click">Subskrybuj</Button>
         </StackPanel>
 
 
