@@ -62,8 +62,9 @@ namespace EneaWPF
             await downloadString();
             await createFileFromString();
             await createListFromFile();
-            removeUnnecesaryInformationFromList();
             makeMagicWithList();
+            removeUnnecesaryInformationFromList();
+            removeBlanksFromList();
             test = createListToShow();
             OnPropertyChanged("DataList");
         }
@@ -116,15 +117,32 @@ namespace EneaWPF
 
         private void removeUnnecesaryInformationFromList()
         {
-            string importantLine = string.Empty;
+            string startingLine = string.Empty;
+            string finishLine = string.Empty;
             foreach (string line in downloadedDataList)
             {
                 if (line.Contains("Wyłączenia w Rejonie Dystrybucji Bydgoszcz"))
                 {
-                    importantLine = line;
+                    startingLine = line;
+                }
+                if (line.Contains("Kim jesteśmy"))
+                {
+                    finishLine = line;
                 }
             }
-            downloadedDataList.RemoveRange(0, downloadedDataList.IndexOf(importantLine));
+            downloadedDataList.RemoveRange(0, downloadedDataList.IndexOf(startingLine));
+            downloadedDataList.RemoveRange(downloadedDataList.IndexOf(finishLine), downloadedDataList.Count - 1 - downloadedDataList.IndexOf(finishLine));
+        }
+
+
+        private void removeBlanksFromList()
+        {
+            for (int i = 0; i < downloadedDataList.Count; i++)
+            {
+                downloadedDataList[i] = downloadedDataList[i].Trim();
+
+                if (String.IsNullOrEmpty(downloadedDataList[i])) downloadedDataList.RemoveAt(i);
+            }
         }
 
         public void TestList()

@@ -11,10 +11,12 @@ namespace EneaWPF
     {
         static Regex _htmlRegex = new Regex("<.*?>", RegexOptions.Compiled);
 
+
         public static string CutTagsFromHtml(string source)
         {
             return _htmlRegex.Replace(source, string.Empty);
         }
+
 
     }
 }
