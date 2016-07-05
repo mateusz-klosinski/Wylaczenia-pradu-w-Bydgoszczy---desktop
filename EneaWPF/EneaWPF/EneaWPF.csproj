@@ -81,7 +81,7 @@
     </Compile>
     <Compile Include="AppManager.cs" />
     <Compile Include="Disconnection.cs" />
-    <Compile Include="TagRemoveHelper.cs" />
+    <Compile Include="StringHelper.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

@@ -62,13 +62,18 @@ namespace EneaWPF
             await downloadString();
             await createFileFromString();
             await createListFromFile();
-            makeMagicWithList();
-            removeUnnecesaryInformationFromList();
-            removeBlanksFromList();
+            formatList();
             test = createListToShow();
             OnPropertyChanged("DataList");
         }
 
+
+        private void formatList()
+        {
+            StringHelper.removeHtmlTagsFromList(ref downloadedDataList);
+            StringHelper.removeUnnecesaryInformationFromList(ref downloadedDataList);
+            StringHelper.removeBlanksFromList(ref downloadedDataList);
+        }
 
 
 
@@ -100,56 +105,6 @@ namespace EneaWPF
         }
 
 
-
-        private void makeMagicWithList()
-        {
-            List<string> copiedList = new List<string>();
-            copiedList.AddRange(downloadedDataList);
-            downloadedDataList.Clear();
-
-
-            foreach(string line in copiedList)
-            {
-                downloadedDataList.Add(TagRemoveHelper.CutTagsFromHtml(line));
-            }
-        }
-
-
-        private void removeUnnecesaryInformationFromList()
-        {
-            string startingLine = string.Empty;
-            string finishLine = string.Empty;
-            foreach (string line in downloadedDataList)
-            {
-                if (line.Contains("Wyłączenia w Rejonie Dystrybucji Bydgoszcz"))
-                {
-                    startingLine = line;
-                }
-                if (line.Contains("Kim jesteśmy"))
-                {
-                    finishLine = line;
-                }
-            }
-            downloadedDataList.RemoveRange(0, downloadedDataList.IndexOf(startingLine) + 1);
-            downloadedDataList.RemoveRange(downloadedDataList.IndexOf(finishLine), downloadedDataList.Count - 1 - downloadedDataList.IndexOf(finishLine));
-        }
-
-
-        private void removeBlanksFromList()
-        {
-            List<string> copiedList = new List<string>();
-            copiedList.AddRange(downloadedDataList);
-
-            foreach(string line in copiedList)
-            {
-                if (string.IsNullOrWhiteSpace(line)) downloadedDataList.Remove(line);
-            }
-
-            for (int i = 0; i < downloadedDataList.Count; i++)
-            {
-                downloadedDataList[i] = downloadedDataList[i].Trim();
-            }
-        }
 
         public void TestList()
         {
