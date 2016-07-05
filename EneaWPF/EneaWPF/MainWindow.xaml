@@ -19,7 +19,8 @@
             <RowDefinition/>
             <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
-        <StackPanel Margin="10,10,10,10"  Grid.RowSpan="2" Background="#FFA2CCFF">
+        <TextBlock x:Name="downloadingTextBlock" VerticalAlignment="Center" TextAlignment="Center" FontSize="40">Pobieranie danych.</TextBlock>
+        <StackPanel x:Name="mainStackPanel" Margin="10,10,10,10"  Grid.RowSpan="2" Background="#FFA2CCFF" Visibility="Collapsed">
             <TextBlock HorizontalAlignment="Center" FontWeight="Bold" FontStyle="Italic">Planowane wyłączenia w Bydgoszczy</TextBlock>
             <TextBlock HorizontalAlignment="Stretch" Margin="10,0,10,0" FontWeight="Heavy" Background="#FF76ABEA">Dzisiaj</TextBlock>
             <ListView x:Name="todayListBox" ItemsSource="{Binding TodayList}" Margin="10,0,10,10" Background="White" Height="100" SelectionChanged="todayListBox_SelectionChanged" MouseLeave="todayListBox_MouseLeave" />
