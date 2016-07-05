@@ -20,9 +20,18 @@ namespace EneaWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        Controller controller;
         public MainWindow()
         {
             InitializeComponent();
+            controller = new Controller();
+            grid.DataContext = controller;
+        }
+
+        private void CheckForElectricy_Click(object sender, RoutedEventArgs e)
+        {
+            controller.UpdateData();
         }
     }
 }
