@@ -18,7 +18,7 @@ namespace EneaWPF
             Area = area;
             Date = date;
             Details = details;
-            Time = Date.Substring(9, Date.Length);
+            Time = Date.Substring(9, Date.Length - 10);
         }
 
         public override string ToString()

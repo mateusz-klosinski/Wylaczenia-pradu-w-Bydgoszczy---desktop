@@ -18,9 +18,13 @@ namespace EneaWPF
         private List<string> downloadedDataList = new List<string>();
 
 
-        public ObservableCollection<Disconnection> TodayDisconnectionList { get; private set; }
-        public ObservableCollection<Disconnection> TommorowDisconnectionList { get; private set; }
-        public ObservableCollection<Disconnection> ElseDisconectionList { get; private set; }
+        private ObservableCollection<Disconnection> todayDisconnectionList = new ObservableCollection<Disconnection>();
+        private ObservableCollection<Disconnection> tomorrowDisconnectionList = new ObservableCollection<Disconnection>();
+        private ObservableCollection<Disconnection> elseDisconnectionList = new ObservableCollection<Disconnection>();
+
+        public ObservableCollection<Disconnection> TodayList { get { return todayDisconnectionList; } }
+        public ObservableCollection<Disconnection> TommorowList { get { return tomorrowDisconnectionList; } }
+        public ObservableCollection<Disconnection> ElseList { get { return elseDisconnectionList; } }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -58,9 +62,9 @@ namespace EneaWPF
 
         public async void UpdateData()
         {
-            TodayDisconnectionList = null;
-            TommorowDisconnectionList = null;
-            ElseDisconectionList = null;
+            todayDisconnectionList.Clear();
+            tomorrowDisconnectionList.Clear();
+            elseDisconnectionList.Clear();
 
             downloadedData = null;
             downloadedDataList.Clear();
@@ -129,10 +133,24 @@ namespace EneaWPF
 
         private void makeDisconnectionLists()
         {
-            ObservableCollection<Disconnection> listToShow = new ObservableCollection<Disconnection>();
+            ObservableCollection<Disconnection> DisconnectionsList = new ObservableCollection<Disconnection>();
             for (int i = 0; i < downloadedDataList.Count; i+=3)
             {
-                listToShow.Add(new Disconnection(downloadedDataList[i], downloadedDataList[i + 1], downloadedDataList[i + 2]));
+                DisconnectionsList.Add(new Disconnection(downloadedDataList[i], downloadedDataList[i + 1], downloadedDataList[i + 2]));
+            }
+
+            foreach (Disconnection disconnection in DisconnectionsList)
+            {
+                if (disconnection.ConvertDate().Date == DateTime.Now.Date)
+                {
+                    todayDisconnectionList.Add(disconnection);
+                }
+                else if (disconnection.ConvertDate().Date == DateTime.Now.Date + TimeSpan.FromDays(1))
+                {
+                    tomorrowDisconnectionList.Add(disconnection);
+                }
+                else
+                    elseDisconnectionList.Add(disconnection);
             }
 
         }
