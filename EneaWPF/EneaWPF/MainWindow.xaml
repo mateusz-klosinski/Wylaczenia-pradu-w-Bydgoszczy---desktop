@@ -19,15 +19,22 @@
             <RowDefinition/>
             <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
+        
+        
         <TextBlock x:Name="downloadingTextBlock" VerticalAlignment="Center" TextAlignment="Center" FontSize="40">Pobieranie danych.</TextBlock>
-        <StackPanel x:Name="mainStackPanel" Margin="10,10,10,10"  Grid.RowSpan="2" Background="#FFA2CCFF" Visibility="Collapsed">
+        
+        
+        <StackPanel x:Name="mainStackPanel" Margin="10,10,10,10"  Grid.RowSpan="2" Background="#FFA2CCFF" Visibility="Collapsed" MouseLeftButtonDown="mainStackPanel_MouseLeftButtonDown">
             <TextBlock HorizontalAlignment="Center" FontWeight="Bold" FontStyle="Italic">Planowane wyłączenia w Bydgoszczy</TextBlock>
             <TextBlock HorizontalAlignment="Stretch" Padding="5,5,0,0" Margin="10,0,10,0" FontWeight="Heavy" Background="#FF76ABEA">Dzisiaj</TextBlock>
-            <ListView x:Name="todayListBox" ItemsSource="{Binding TodayList}" Margin="10,0,10,10" Background="White" Height="100" SelectionChanged="todayListBox_SelectionChanged" MouseLeave="todayListBox_MouseLeave" />
+            <ListView x:Name="todayListBox" ItemsSource="{Binding TodayList}" Margin="10,0,10,10" Background="White" Height="100" 
+                      SelectionChanged="todayListBox_SelectionChanged" />
             <TextBlock HorizontalAlignment="Stretch" Padding="5,5,0,0" Margin="10,0,10,0" FontWeight="Heavy" Background="#FF76ABEA">Jutro</TextBlock>
-            <ListView x:Name="tommorowListBox" ItemsSource="{Binding TommorowList}" Margin="10,0,10,10" Background="White" Height="100" SelectionChanged="tommorowListBox_SelectionChanged" MouseLeave="tommorowListBox_MouseLeave"  />
+            <ListView x:Name="tommorowListBox" ItemsSource="{Binding TommorowList}" Margin="10,0,10,10" Background="White" Height="100" 
+                      SelectionChanged="tommorowListBox_SelectionChanged"/>
             <TextBlock HorizontalAlignment="Stretch" Padding="5,5,0,0" Margin="10,0,10,0" FontWeight="Heavy" Background="#FF76ABEA">W inne dni</TextBlock>
-            <ListView x:Name="elseListBox" Grid.RowSpan="2" ItemsSource="{Binding ElseList}" Margin="10,0,10,10" Background="White" Height="100" SelectionChanged="elseListBox_SelectionChanged" MouseLeave="elseListBox_MouseLeave"  />
+            <ListView x:Name="elseListBox" Grid.RowSpan="2" ItemsSource="{Binding ElseList}" Margin="10,0,10,10" Background="White" Height="100" 
+                      SelectionChanged="elseListBox_SelectionChanged"/>
         </StackPanel>
 
 
@@ -49,13 +56,14 @@
                 <Run FontWeight="Normal" Text="{Binding ToNextUpdate, Mode=OneWay}"></Run>
             </TextBlock>
             <TextBlock FontStyle="Italic" FontWeight="Bold">Subskrypcja SMS: </TextBlock>
-            <TextBlock Foreground="Green" Text=" WŁĄCZONA" Visibility="Collapsed"></TextBlock>
-            <TextBlock Foreground="Red" Text=" WYŁĄCZONA"></TextBlock>
+            <TextBlock x:Name="SubscriptionIsOnTextBlock" Foreground="Green" Text=" WŁĄCZONA" Visibility="Collapsed"></TextBlock>
+            <TextBlock x:Name="SubscriptionIsOffTextBlock" Foreground="Red" Text=" WYŁĄCZONA"></TextBlock>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,0,10,10">
             <Button x:Name="PlugInDevice" Width="100" Height="40" Margin="0,0,80,0" Click="PlugInDevice_Click">Podłącz telefon</Button>
             <Button x:Name="StartSubscription" Width="100" Height="40" IsEnabled="False" Click="StartSubscription_Click">Subskrybuj</Button>
+            <Button x:Name="EndSubscription" Width="100" Height="40" Click="EndSubscription_Click" Visibility="Collapsed">Subskrybuj</Button>
         </StackPanel>
 
 

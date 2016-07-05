@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GsmComm.GsmCommunication;
 using System.IO.Ports;
+using GsmComm.PduConverter;
 
 namespace EneaWPF
 {

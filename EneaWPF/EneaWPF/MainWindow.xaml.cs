@@ -23,11 +23,16 @@ namespace EneaWPF
     {
         DispatcherTimer timer = new DispatcherTimer();
         AppManager manager;
+        HandlePhone phone;
+        bool isSubscriptionTurnedOn = false;
+
         public MainWindow()
         {
             InitializeComponent();
             manager = new AppManager();
+            phone = new HandlePhone();
             grid.DataContext = manager;
+
             timer.Interval = TimeSpan.FromSeconds(0.5);
             timer.Tick += Timer_Tick;
             timer.Start();
@@ -83,29 +88,48 @@ namespace EneaWPF
                 manager.updateDetails(disconnection);
         }
 
-        private void todayListBox_MouseLeave(object sender, MouseEventArgs e)
-        {
-            todayListBox.SelectedItem = null;
-        }
 
-        private void tommorowListBox_MouseLeave(object sender, MouseEventArgs e)
-        {
-            tommorowListBox.SelectedItem = null;
-        }
-
-        private void elseListBox_MouseLeave(object sender, MouseEventArgs e)
-        {
-            elseListBox.SelectedItem = null;
-        }
 
         private void PlugInDevice_Click(object sender, RoutedEventArgs e)
         {
+
+            if (phone.COMCheck() == true)
+            {
+                MessageBox.Show("Znaleiono urządzenie");
+                StartSubscription.IsEnabled = true;
+                PlugInDevice.IsEnabled = false;
+                PlugInDevice.Content = "Podłączono telefon";
+            }
+            else MessageBox.Show("Nie znaleziono urządzenia");
 
         }
 
         private void StartSubscription_Click(object sender, RoutedEventArgs e)
         {
+            isSubscriptionTurnedOn = true;
 
+            SubscriptionIsOffTextBlock.Visibility = Visibility.Collapsed;
+            SubscriptionIsOnTextBlock.Visibility = Visibility.Visible;
+            StartSubscription.Visibility = Visibility.Collapsed;
+            EndSubscription.Visibility = Visibility.Visible;
         }
+
+        private void EndSubscription_Click(object sender, RoutedEventArgs e)
+        {
+            isSubscriptionTurnedOn = false;
+
+            SubscriptionIsOnTextBlock.Visibility = Visibility.Collapsed;
+            SubscriptionIsOffTextBlock.Visibility = Visibility.Visible;
+            StartSubscription.Visibility = Visibility.Visible;
+            EndSubscription.Visibility = Visibility.Collapsed;
+        }
+
+        private void mainStackPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            todayListBox.SelectedItem = null;
+            tommorowListBox.SelectedItem = null;
+            elseListBox.SelectedItem = null;
+        }
+
     }
 }
