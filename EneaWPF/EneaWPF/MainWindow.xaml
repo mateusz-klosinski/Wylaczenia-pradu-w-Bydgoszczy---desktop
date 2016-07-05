@@ -31,7 +31,7 @@
                     </LinearGradientBrush>
                 </ComboBox.Background>
             </ComboBox>
-            <Button x:Name="button" Content="Button" Click="button_Click"/>
+            <Button x:Name="button" Content="Do testów" Click="button_Click"/>
         </StackPanel>
 
         <Button  Grid.Column="1" Grid.Row="1" Margin="10,10,10,10" x:Name="CheckForElectricy" Content="Sprawdź przerwy w dostawach prądu" 

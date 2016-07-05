@@ -16,9 +16,11 @@ namespace EneaWPF
 
         private string downloadedData;
         private List<string> downloadedDataList = new List<string>();
-        private ObservableCollection<Disconnection> test;
 
-        public ObservableCollection<Disconnection> DataList { get { return test; } }
+
+        public ObservableCollection<Disconnection> TodayDisconnectionList { get; private set; }
+        public ObservableCollection<Disconnection> TommorowDisconnectionList { get; private set; }
+        public ObservableCollection<Disconnection> ElseDisconectionList { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -56,15 +58,24 @@ namespace EneaWPF
 
         public async void UpdateData()
         {
-            test = null;
+            TodayDisconnectionList = null;
+            TommorowDisconnectionList = null;
+            ElseDisconectionList = null;
+
             downloadedData = null;
             downloadedDataList.Clear();
+
+
             await downloadString();
             await createFileFromString();
             await createListFromFile();
             formatList();
-            test = createListToShow();
-            OnPropertyChanged("DataList");
+
+            makeDisconnectionLists();
+
+            OnPropertyChanged("TodayDisconnectionList");
+            OnPropertyChanged("TommorowDisconnectionList");
+            OnPropertyChanged("ElseDisconnectionList");
         }
 
 
@@ -116,7 +127,7 @@ namespace EneaWPF
         }
 
 
-        private ObservableCollection<Disconnection> createListToShow()
+        private void makeDisconnectionLists()
         {
             ObservableCollection<Disconnection> listToShow = new ObservableCollection<Disconnection>();
             for (int i = 0; i < downloadedDataList.Count; i+=3)
@@ -124,7 +135,6 @@ namespace EneaWPF
                 listToShow.Add(new Disconnection(downloadedDataList[i], downloadedDataList[i + 1], downloadedDataList[i + 2]));
             }
 
-            return listToShow;
         }
 
     }
