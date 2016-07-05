@@ -21,22 +21,22 @@ namespace EneaWPF
     public partial class MainWindow : Window
     {
 
-        Controller controller;
+        AppManager manager;
         public MainWindow()
         {
             InitializeComponent();
-            controller = new Controller();
-            grid.DataContext = controller;
+            manager = new AppManager();
+            grid.DataContext = manager;
         }
 
         private void CheckForElectricy_Click(object sender, RoutedEventArgs e)
         {
-            controller.UpdateData();
+            manager.UpdateData();
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            controller.TestList();
+            manager.TestList();
         }
     }
 }

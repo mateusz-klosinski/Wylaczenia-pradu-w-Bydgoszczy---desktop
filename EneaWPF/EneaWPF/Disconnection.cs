@@ -19,5 +19,10 @@ namespace EneaWPF
             Details = details;
         }
 
+        public override string ToString()
+        {
+            return Area;
+        }
+
     }
 }

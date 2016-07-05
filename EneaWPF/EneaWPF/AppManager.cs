@@ -11,14 +11,14 @@ using System.Windows;
 
 namespace EneaWPF
 {
-    class Controller : INotifyPropertyChanged
+    class AppManager : INotifyPropertyChanged
     {
 
         private string downloadedData;
         private List<string> downloadedDataList = new List<string>();
-        private ObservableCollection<string> test;
+        private ObservableCollection<Disconnection> test;
 
-        public ObservableCollection<string> DataList { get { return test; } }
+        public ObservableCollection<Disconnection> DataList { get { return test; } }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -130,18 +130,24 @@ namespace EneaWPF
                     finishLine = line;
                 }
             }
-            downloadedDataList.RemoveRange(0, downloadedDataList.IndexOf(startingLine));
+            downloadedDataList.RemoveRange(0, downloadedDataList.IndexOf(startingLine) + 1);
             downloadedDataList.RemoveRange(downloadedDataList.IndexOf(finishLine), downloadedDataList.Count - 1 - downloadedDataList.IndexOf(finishLine));
         }
 
 
         private void removeBlanksFromList()
         {
+            List<string> copiedList = new List<string>();
+            copiedList.AddRange(downloadedDataList);
+
+            foreach(string line in copiedList)
+            {
+                if (string.IsNullOrWhiteSpace(line)) downloadedDataList.Remove(line);
+            }
+
             for (int i = 0; i < downloadedDataList.Count; i++)
             {
                 downloadedDataList[i] = downloadedDataList[i].Trim();
-
-                if (String.IsNullOrEmpty(downloadedDataList[i])) downloadedDataList.RemoveAt(i);
             }
         }
 
@@ -155,14 +161,12 @@ namespace EneaWPF
         }
 
 
-        private ObservableCollection<string> createListToShow()
+        private ObservableCollection<Disconnection> createListToShow()
         {
-            ObservableCollection<string> listToShow = new ObservableCollection<string>();
-            for (int i = 0; i < downloadedDataList.Count; i++)
+            ObservableCollection<Disconnection> listToShow = new ObservableCollection<Disconnection>();
+            for (int i = 0; i < downloadedDataList.Count; i+=3)
             {
-                if (downloadedDataList[i].Contains("dzisiaj"))
-                    listToShow.Add(downloadedDataList[i - 1] + downloadedDataList[i]);
-
+                listToShow.Add(new Disconnection(downloadedDataList[i], downloadedDataList[i + 1], downloadedDataList[i + 2]));
             }
 
             return listToShow;
