@@ -28,7 +28,7 @@ namespace EneaWPF
             InitializeComponent();
             manager = new AppManager();
             grid.DataContext = manager;
-            timer.Interval = TimeSpan.FromSeconds(0.7);
+            timer.Interval = TimeSpan.FromSeconds(0.5);
             timer.Tick += Timer_Tick;
             timer.Start();
         }
@@ -45,6 +45,14 @@ namespace EneaWPF
             {
                 downloadingTextBlock.Visibility = Visibility.Collapsed;
                 mainStackPanel.Visibility = Visibility.Visible;
+
+                if (todayListBox.Items.Count > 0)
+                    todayListBox.SelectedIndex = 0;
+                else if (tommorowListBox.Items.Count > 0)
+                    tommorowListBox.SelectedIndex = 0;
+                else if (elseListBox.Items.Count > 0)
+                    elseListBox.SelectedIndex = 0;
+
                 timer.Stop();
             }
         }
