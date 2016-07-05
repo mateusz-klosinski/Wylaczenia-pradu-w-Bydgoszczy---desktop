@@ -8,11 +8,14 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace EneaWPF
 {
     class AppManager : INotifyPropertyChanged
     {
+
+        DispatcherTimer timer = new DispatcherTimer();
 
         private string downloadedData;
         private List<string> downloadedDataList = new List<string>();
@@ -34,6 +37,32 @@ namespace EneaWPF
         public string Details { get; set; }
 
 
+        private DateTime lastUpdate;
+        private TimeSpan toNextUpdate;
+        public string LastUpdate { get { return lastUpdate.ToLongDateString(); } }
+        public string ToNextUpdate {
+            get
+            {
+                return toNextUpdate.Days + " " + StringHelper.getProperEndingInPolish(toNextUpdate.Days, true) + " " +
+                toNextUpdate.Hours + " godzin" + StringHelper.getProperEndingInPolish(toNextUpdate.Hours) + " " +
+                toNextUpdate.Minutes + " minut" + StringHelper.getProperEndingInPolish(toNextUpdate.Minutes);
+            }
+        }
+
+
+        public AppManager()
+        {
+            UpdateData();
+            timer.Interval = TimeSpan.FromMinutes(1);
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            toNextUpdate -= TimeSpan.FromMinutes(1);
+            OnPropertyChanged("ToNextUpdate");
+        }
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -81,6 +110,12 @@ namespace EneaWPF
             formatList();
 
             makeDisconnectionLists();
+
+            lastUpdate = DateTime.Now;
+            toNextUpdate = TimeSpan.FromHours(24);
+
+            OnPropertyChanged("LastUpdate");
+            OnPropertyChanged("ToNextUpdate");
 
             OnPropertyChanged("TodayDisconnectionList");
             OnPropertyChanged("TommorowDisconnectionList");

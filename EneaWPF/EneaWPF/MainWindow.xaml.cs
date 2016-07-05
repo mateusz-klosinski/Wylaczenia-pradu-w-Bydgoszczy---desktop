@@ -27,13 +27,9 @@ namespace EneaWPF
             InitializeComponent();
             manager = new AppManager();
             grid.DataContext = manager;
-            manager.UpdateData();
-        }
-
-        private void CheckForElectricy_Click(object sender, RoutedEventArgs e)
-        {
 
         }
+
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
