@@ -25,9 +25,11 @@ namespace EneaWPF
         DispatcherTimer timer = new DispatcherTimer();
         AppManager manager;
         HandlePhone phone;
-        bool isSMSSubscriptionTurnedOn = false;
-        bool isEMAILSubscriptionTurnedOn = false;
+
+
         bool isPhoneHandled = false;
+
+
 
         public MainWindow()
         {
@@ -40,6 +42,12 @@ namespace EneaWPF
             timer.Tick += Timer_Tick;
             timer.Start();
         }
+
+
+
+
+
+
 
         private void Timer_Tick(object sender, EventArgs e)
         {
@@ -65,10 +73,8 @@ namespace EneaWPF
             }
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            manager.TestList();
-        }
+
+
 
         private void todayListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -93,6 +99,8 @@ namespace EneaWPF
 
 
 
+
+
         private void PlugInDevice_Click(object sender, RoutedEventArgs e)
         {
             if (phone.COMCheck() == true)
@@ -110,27 +118,6 @@ namespace EneaWPF
             else MessageBox.Show("Nie znaleziono urządzenia");
 
         }
-
-        private void StartSubscription_Click(object sender, RoutedEventArgs e)
-        {
-            isSMSSubscriptionTurnedOn = true;
-
-            SubscriptionIsOffTextBlock.Visibility = Visibility.Collapsed;
-            SubscriptionIsOnTextBlock.Visibility = Visibility.Visible;
-            StartSMSSubscription.Visibility = Visibility.Collapsed;
-            EndSMSSubscription.Visibility = Visibility.Visible;
-        }
-
-        private void EndSubscription_Click(object sender, RoutedEventArgs e)
-        {
-            isSMSSubscriptionTurnedOn = false;
-
-            SubscriptionIsOnTextBlock.Visibility = Visibility.Collapsed;
-            SubscriptionIsOffTextBlock.Visibility = Visibility.Visible;
-            StartSMSSubscription.Visibility = Visibility.Visible;
-            EndSMSSubscription.Visibility = Visibility.Collapsed;
-        }
-
 
 
         private void mainStackPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -207,6 +194,34 @@ namespace EneaWPF
             ConfirmMailButton.IsEnabled = false;
             ConfirmMailButton.Content = "Zatwierdzono";
             StartEmailSubscription.IsEnabled = true;
+        }
+
+
+
+        private void StartSubscription_Click(object sender, RoutedEventArgs e)
+        {
+            SubscriptionIsOffTextBlock.Visibility = Visibility.Collapsed;
+            SubscriptionIsOnTextBlock.Visibility = Visibility.Visible;
+            StartSMSSubscription.Visibility = Visibility.Collapsed;
+            EndSMSSubscription.Visibility = Visibility.Visible;
+        }
+
+        private void EndSubscription_Click(object sender, RoutedEventArgs e)
+        {
+            SubscriptionIsOnTextBlock.Visibility = Visibility.Collapsed;
+            SubscriptionIsOffTextBlock.Visibility = Visibility.Visible;
+            StartSMSSubscription.Visibility = Visibility.Visible;
+            EndSMSSubscription.Visibility = Visibility.Collapsed;
+        }
+
+        private void StartEmailSubscription_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EndEmailSubscription_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

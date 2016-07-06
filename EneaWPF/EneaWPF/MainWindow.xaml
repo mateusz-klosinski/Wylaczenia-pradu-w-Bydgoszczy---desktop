@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EneaWPF"
         mc:Ignorable="d"
-        Title="Przerwy w dostawach prądu - Enea" Height="500" Width="800" MaxHeight="500" MinHeight="500" MinWidth="700" Background="#FFD7D7D8">
+        Title="Przerwy w dostawach prądu - Enea" Height="500" Width="950" MaxHeight="500" MinHeight="500" MinWidth="700" Background="#FFD7D7D8">
 
 
 
@@ -67,7 +67,8 @@
                         <TextBox x:Name="insertEmailBox" Height="30" FontSize="20" Text="Wpisz adres e-mail..." GotMouseCapture="insertEmailBox_GotMouseCapture"
                                  TextChanged="insertEmailBox_TextChanged"></TextBox>
                         <Button x:Name="ConfirmMailButton" Height="30" IsEnabled="False" Click="ConfirmMailButton_Click">Błędny adres e-mail!</Button>
-                        <Button x:Name="StartEmailSubscription" Height="30" IsEnabled="False">Subskrybuj</Button>
+                        <Button x:Name="StartEmailSubscription" Height="30" IsEnabled="False" Click="StartEmailSubscription_Click">Subskrybuj</Button>
+                        <Button x:Name="EndEmailSubscription" Height="30" Visibility="Collapsed" Click="EndEmailSubscription_Click">Anuluj</Button>
                     </StackPanel>
                 </Grid>
             </TabItem>
@@ -85,6 +86,10 @@
             <TextBlock FontStyle="Italic" FontWeight="Bold">Subskrypcja SMS: </TextBlock>
             <TextBlock x:Name="SubscriptionIsOnTextBlock" Foreground="Green" Text=" WŁĄCZONA" Visibility="Collapsed"></TextBlock>
             <TextBlock x:Name="SubscriptionIsOffTextBlock" Foreground="Red" Text=" WYŁĄCZONA"></TextBlock>
+            <TextBlock FontStyle="Italic" FontWeight="Bold" Margin="20,0,0,0">Subskrypcja E-mail:</TextBlock>
+            <TextBlock x:Name="EmailSubscriptionIsOnTextBlock" Foreground="Green" Text=" WŁĄCZONA" Visibility="Collapsed"></TextBlock>
+            <TextBlock x:Name="EmailSubscriptionIsOffTextBlock" Foreground="Red" Text=" WYŁĄCZONA"></TextBlock>
+
         </StackPanel>
 
 
