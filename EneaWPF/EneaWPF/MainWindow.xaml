@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EneaWPF"
         mc:Ignorable="d"
-        Title="Przerwy w dostawach prądu - Enea" Height="500" Width="800" MaxHeight="500" MinHeight="500" MinWidth="560" Background="#FFD7D7D8">
+        Title="Przerwy w dostawach prądu - Enea" Height="500" Width="800" MaxHeight="500" MinHeight="500" MinWidth="700" Background="#FFD7D7D8">
 
 
 
@@ -49,13 +49,13 @@
         <TabControl Margin="20,0,20,10"  x:Name="tabControl" Height="130" Grid.Column="1" Grid.Row="1">
             <TabItem Header="SMS">
                 <Grid Background="#FFE5E5E5">
-                    <StackPanel>
+                    <StackPanel HorizontalAlignment="Stretch">
                         <TextBox Height="30" FontSize="20" Text="Wpisz numer..."></TextBox>
-                        <Button Height="30" x:Name="ConfirmPhoneNumber">Zatwierdź</Button>
-                        <StackPanel Orientation="Horizontal" >
-                            <Button x:Name="PlugInDevice" Width="126" Height="40" Margin="0,0,0,0" Click="PlugInDevice_Click">Podłącz telefon</Button>
-                            <Button x:Name="StartSMSSubscription" Width="127"  Height="40" IsEnabled="False" Click="StartSubscription_Click">Subskrybuj</Button>
-                            <Button x:Name="EndSMSSubscription" Height="40" Click="EndSubscription_Click" Visibility="Collapsed">Anuluj</Button>
+                        <Button Height="20" x:Name="ConfirmPhoneNumber">Zatwierdź</Button>
+                        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                            <Button x:Name="PlugInDevice" Height="20" Margin="0,0,0,0" Click="PlugInDevice_Click">Podłącz telefon</Button>
+                            <Button x:Name="StartSMSSubscription" Height="30" IsEnabled="False" Click="StartSubscription_Click">Subskrybuj</Button>
+                            <Button x:Name="EndSMSSubscription" Height="30" Click="EndSubscription_Click" Visibility="Collapsed">Anuluj</Button>
                         </StackPanel>
                     </StackPanel>
                 </Grid>
