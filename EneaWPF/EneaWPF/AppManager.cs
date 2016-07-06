@@ -51,6 +51,9 @@ namespace EneaWPF
             }
         }
 
+        public bool isSMSSubscriptionRunning = false;
+        public bool isEmailSubscriptionRunning = false;
+
 
         public AppManager()
         {

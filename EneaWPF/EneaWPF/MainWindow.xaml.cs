@@ -204,6 +204,8 @@ namespace EneaWPF
             SubscriptionIsOnTextBlock.Visibility = Visibility.Visible;
             StartSMSSubscription.Visibility = Visibility.Collapsed;
             EndSMSSubscription.Visibility = Visibility.Visible;
+
+            manager.isSMSSubscriptionRunning = true;
         }
 
         private void EndSubscription_Click(object sender, RoutedEventArgs e)
@@ -212,16 +214,28 @@ namespace EneaWPF
             SubscriptionIsOffTextBlock.Visibility = Visibility.Visible;
             StartSMSSubscription.Visibility = Visibility.Visible;
             EndSMSSubscription.Visibility = Visibility.Collapsed;
+
+            manager.isSMSSubscriptionRunning = false;
         }
 
         private void StartEmailSubscription_Click(object sender, RoutedEventArgs e)
         {
+            EmailSubscriptionIsOffTextBlock.Visibility = Visibility.Collapsed;
+            EmailSubscriptionIsOnTextBlock.Visibility = Visibility.Visible;
+            StartEmailSubscription.Visibility = Visibility.Collapsed;
+            EndEmailSubscription.Visibility = Visibility.Visible;
 
+            manager.isEmailSubscriptionRunning = true;
         }
 
         private void EndEmailSubscription_Click(object sender, RoutedEventArgs e)
         {
+            EmailSubscriptionIsOnTextBlock.Visibility = Visibility.Collapsed;
+            EmailSubscriptionIsOffTextBlock.Visibility = Visibility.Visible;
+            StartEmailSubscription.Visibility = Visibility.Visible;
+            EndEmailSubscription.Visibility = Visibility.Collapsed;
 
+            manager.isEmailSubscriptionRunning = false;
         }
     }
 }
