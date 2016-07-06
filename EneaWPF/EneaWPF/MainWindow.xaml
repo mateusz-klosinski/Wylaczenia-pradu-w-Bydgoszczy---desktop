@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
         
         
-        <TextBlock x:Name="downloadingTextBlock" VerticalAlignment="Center" TextAlignment="Center" FontSize="40">Pobieranie danych.</TextBlock>
+        <TextBlock x:Name="downloadingTextBlock" Grid.RowSpan="2" VerticalAlignment="Center" TextAlignment="Center" FontSize="40">Pobieranie danych.</TextBlock>
         
         
         <StackPanel x:Name="mainStackPanel" Margin="10,10,10,10"  Grid.RowSpan="2" Background="#FFA2CCFF" Visibility="Collapsed" MouseLeftButtonDown="mainStackPanel_MouseLeftButtonDown">
@@ -50,8 +50,9 @@
             <TabItem Header="SMS">
                 <Grid Background="#FFE5E5E5">
                     <StackPanel HorizontalAlignment="Stretch">
-                        <TextBox Height="30" FontSize="20" Text="Wpisz numer..."></TextBox>
-                        <Button Height="20" x:Name="ConfirmPhoneNumber">Zatwierdź</Button>
+                        <TextBox x:Name="insertNumberBox" Height="30" FontSize="20" Text="Wpisz numer..." GotMouseCapture="insertNumberBox_GotMouseCapture"
+                                 TextChanged="insertNumberBox_TextChanged"></TextBox>
+                        <Button Height="20" x:Name="ConfirmPhoneNumberButton" IsEnabled="False">Błędny numer telefonu!</Button>
                         <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                             <Button x:Name="PlugInDevice" Height="20" Margin="0,0,0,0" Click="PlugInDevice_Click">Podłącz telefon</Button>
                             <Button x:Name="StartSMSSubscription" Height="30" IsEnabled="False" Click="StartSubscription_Click">Subskrybuj</Button>
@@ -63,9 +64,10 @@
             <TabItem Header="E-mail">
                 <Grid Background="#FFE5E5E5">
                     <StackPanel>
-                        <TextBox Height="30" FontSize="20" Text="Wpisz adres e-mail..."></TextBox>
-                        <Button x:Name="ConfirmMail" Height="30">Zatwierdź</Button>
-                        <Button x:Name="Subskrybuj" Height="30" IsEnabled="False">Subskrybuj</Button>
+                        <TextBox x:Name="insertEmailBox" Height="30" FontSize="20" Text="Wpisz adres e-mail..." GotMouseCapture="insertEmailBox_GotMouseCapture"
+                                 TextChanged="insertEmailBox_TextChanged"></TextBox>
+                        <Button x:Name="ConfirmMailButton" Height="30" IsEnabled="False">Błędny adres e-mail!</Button>
+                        <Button x:Name="StartEmailSubscription" Height="30" IsEnabled="False">Subskrybuj</Button>
                     </StackPanel>
                 </Grid>
             </TabItem>

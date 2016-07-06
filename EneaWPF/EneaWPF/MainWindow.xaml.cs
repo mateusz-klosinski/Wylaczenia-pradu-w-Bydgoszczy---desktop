@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -125,6 +126,8 @@ namespace EneaWPF
             EndSMSSubscription.Visibility = Visibility.Collapsed;
         }
 
+
+
         private void mainStackPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             todayListBox.SelectedItem = null;
@@ -132,5 +135,49 @@ namespace EneaWPF
             elseListBox.SelectedItem = null;
         }
 
+
+        private void insertNumberBox_GotMouseCapture(object sender, MouseEventArgs e)
+        {
+            if (insertNumberBox.Text.Contains("Wpisz numer..."))
+                insertNumberBox.Text = "";
+        }
+
+        private void insertEmailBox_GotMouseCapture(object sender, MouseEventArgs e)
+        {
+            if (insertEmailBox.Text.Contains("Wpisz adres e-mail..."))
+                insertEmailBox.Text = "";
+        }
+
+        private void insertEmailBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Regex emailRegex = new Regex(@"^(([^<>()[\]\\.,;:\s@\""]+(\.[^<>()[\]\\.,;:\s@\""]+)*)|(\"".+\""))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$");
+            if (emailRegex.IsMatch(insertEmailBox.Text))
+            {
+                ConfirmMailButton.IsEnabled = true;
+                ConfirmMailButton.Content = "Zatwierdź";
+            }
+            else if (ConfirmMailButton != null)
+            {
+                ConfirmMailButton.IsEnabled = false;
+                ConfirmMailButton.Content = "Błędny adres e-mail!";
+            }
+
+        }
+
+        private void insertNumberBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Regex phoneRegex= new Regex(@"^[0-9]{9}$");
+            if (phoneRegex.IsMatch(insertNumberBox.Text))
+            {
+                ConfirmPhoneNumberButton.IsEnabled = true;
+                ConfirmPhoneNumberButton.Content = "Zatwierdź";
+            }
+            else if (ConfirmPhoneNumberButton != null)
+            {
+                ConfirmPhoneNumberButton.IsEnabled = false;
+                ConfirmPhoneNumberButton.Content = "Błędny numer telefonu!";
+            }
+
+        }
     }
 }
