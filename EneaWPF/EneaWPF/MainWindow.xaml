@@ -17,7 +17,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="160"/>
         </Grid.RowDefinitions>
         
         
@@ -38,13 +38,38 @@
         </StackPanel>
 
 
-        <StackPanel Grid.Column="1" Margin="10,10,10,10" Orientation="Vertical" Background="#FFA2CCFF">
+        <StackPanel Grid.Column="1" Margin="10,10,10,10" Orientation="Vertical" Background="#FFA2CCFF" Grid.RowSpan="2">
             <TextBlock Grid.Column="1" FontWeight="Bold" FontStyle="Italic" HorizontalAlignment="Center">Szczegóły</TextBlock>
             <TextBlock Margin="10,5" Padding="5,5,5,5" Text="{Binding Location}" Height="Auto" TextWrapping="Wrap" Background="#FFF0F0F0"></TextBlock>
             <TextBlock Margin="10,5" Padding="5,5,5,5" Text="{Binding Date}" Height="Auto" TextWrapping="WrapWithOverflow" Background="#FFF0F0F0"></TextBlock>
             <TextBlock Margin="10,5" Padding="5,5,5,5" Text="{Binding Time}" Height="Auto"  TextWrapping="Wrap" Background="#FFF0F0F0"></TextBlock>
             <TextBlock Margin="10,5" Padding="5,5,5,5" Text="{Binding Details}" Height="Auto"  TextWrapping="Wrap" Background="#FFF0F0F0"></TextBlock>
         </StackPanel>
+
+        <TabControl Margin="20,0,20,10"  x:Name="tabControl" Height="130" Grid.Column="1" Grid.Row="1">
+            <TabItem Header="SMS">
+                <Grid Background="#FFE5E5E5">
+                    <StackPanel>
+                        <TextBox Height="30" FontSize="20" Text="Wpisz numer..."></TextBox>
+                        <Button Height="30" x:Name="ConfirmPhoneNumber">Zatwierdź</Button>
+                        <StackPanel Orientation="Horizontal" >
+                            <Button x:Name="PlugInDevice" Width="126" Height="40" Margin="0,0,0,0" Click="PlugInDevice_Click">Podłącz telefon</Button>
+                            <Button x:Name="StartSMSSubscription" Width="127"  Height="40" IsEnabled="False" Click="StartSubscription_Click">Subskrybuj</Button>
+                            <Button x:Name="EndSMSSubscription" Height="40" Click="EndSubscription_Click" Visibility="Collapsed">Anuluj</Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="E-mail">
+                <Grid Background="#FFE5E5E5">
+                    <StackPanel>
+                        <TextBox Height="30" FontSize="20" Text="Wpisz adres e-mail..."></TextBox>
+                        <Button x:Name="ConfirmMail" Height="30">Zatwierdź</Button>
+                        <Button x:Name="Subskrybuj" Height="30" IsEnabled="False">Subskrybuj</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
 
         <StackPanel Grid.Row="1" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.ColumnSpan="2" Background="#FFF0F0F0">
             <TextBlock FontStyle="Italic" FontWeight="Bold">
@@ -60,11 +85,6 @@
             <TextBlock x:Name="SubscriptionIsOffTextBlock" Foreground="Red" Text=" WYŁĄCZONA"></TextBlock>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,0,10,10">
-            <Button x:Name="PlugInDevice" Width="100" Height="40" Margin="0,0,80,0" Click="PlugInDevice_Click">Podłącz telefon</Button>
-            <Button x:Name="StartSubscription" Width="100" Height="40" IsEnabled="False" Click="StartSubscription_Click">Subskrybuj</Button>
-            <Button x:Name="EndSubscription" Width="100" Height="40" Click="EndSubscription_Click" Visibility="Collapsed">Subskrybuj</Button>
-        </StackPanel>
 
 
 

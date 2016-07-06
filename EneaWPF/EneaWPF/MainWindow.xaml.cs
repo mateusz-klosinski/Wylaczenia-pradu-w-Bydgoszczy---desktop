@@ -24,7 +24,8 @@ namespace EneaWPF
         DispatcherTimer timer = new DispatcherTimer();
         AppManager manager;
         HandlePhone phone;
-        bool isSubscriptionTurnedOn = false;
+        bool isSMSSubscriptionTurnedOn = false;
+        bool isEMAILSubscriptionTurnedOn = false;
 
         public MainWindow()
         {
@@ -96,7 +97,7 @@ namespace EneaWPF
             if (phone.COMCheck() == true)
             {
                 MessageBox.Show("Znaleiono urządzenie");
-                StartSubscription.IsEnabled = true;
+                StartSMSSubscription.IsEnabled = true;
                 PlugInDevice.IsEnabled = false;
                 PlugInDevice.Content = "Podłączono telefon";
             }
@@ -106,22 +107,22 @@ namespace EneaWPF
 
         private void StartSubscription_Click(object sender, RoutedEventArgs e)
         {
-            isSubscriptionTurnedOn = true;
+            isSMSSubscriptionTurnedOn = true;
 
             SubscriptionIsOffTextBlock.Visibility = Visibility.Collapsed;
             SubscriptionIsOnTextBlock.Visibility = Visibility.Visible;
-            StartSubscription.Visibility = Visibility.Collapsed;
-            EndSubscription.Visibility = Visibility.Visible;
+            StartSMSSubscription.Visibility = Visibility.Collapsed;
+            EndSMSSubscription.Visibility = Visibility.Visible;
         }
 
         private void EndSubscription_Click(object sender, RoutedEventArgs e)
         {
-            isSubscriptionTurnedOn = false;
+            isSMSSubscriptionTurnedOn = false;
 
             SubscriptionIsOnTextBlock.Visibility = Visibility.Collapsed;
             SubscriptionIsOffTextBlock.Visibility = Visibility.Visible;
-            StartSubscription.Visibility = Visibility.Visible;
-            EndSubscription.Visibility = Visibility.Collapsed;
+            StartSMSSubscription.Visibility = Visibility.Visible;
+            EndSMSSubscription.Visibility = Visibility.Collapsed;
         }
 
         private void mainStackPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
