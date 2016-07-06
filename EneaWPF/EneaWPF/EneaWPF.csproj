@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="AppManager.cs" />
     <Compile Include="Disconnection.cs" />
+    <Compile Include="HandleEmail.cs" />
     <Compile Include="HandlePhone.cs" />
     <Compile Include="StringHelper.cs" />
     <Compile Include="MainWindow.xaml.cs">

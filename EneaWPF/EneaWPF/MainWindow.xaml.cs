@@ -40,7 +40,7 @@ namespace EneaWPF
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (todayListBox.Items.Count == 0 || tommorowListBox.Items.Count == 0 || elseListBox.Items.Count == 0)
+            if (todayListBox.Items.Count == 0 && tommorowListBox.Items.Count == 0 && elseListBox.Items.Count == 0)
             {
                 downloadingTextBlock.Text += ".";
                 if (downloadingTextBlock.Text.Length > 20)

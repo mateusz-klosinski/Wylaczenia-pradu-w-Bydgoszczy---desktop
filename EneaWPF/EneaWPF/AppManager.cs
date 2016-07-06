@@ -149,8 +149,6 @@ namespace EneaWPF
 
         private async Task createFileFromString()
         {
-            await downloadString();
-
             using (StreamWriter writer = new StreamWriter(new FileStream(@"enea.html", FileMode.OpenOrCreate, FileAccess.ReadWrite), Encoding.Default))
             {
                 await writer.WriteLineAsync(downloadedData);
