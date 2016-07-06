@@ -52,7 +52,7 @@
                     <StackPanel HorizontalAlignment="Stretch">
                         <TextBox x:Name="insertNumberBox" Height="30" FontSize="20" Text="Wpisz numer..." GotMouseCapture="insertNumberBox_GotMouseCapture"
                                  TextChanged="insertNumberBox_TextChanged"></TextBox>
-                        <Button Height="20" x:Name="ConfirmPhoneNumberButton" IsEnabled="False">Błędny numer telefonu!</Button>
+                        <Button Height="20" x:Name="ConfirmPhoneNumberButton" IsEnabled="False" Click="ConfirmPhoneNumberButton_Click">Błędny numer telefonu!</Button>
                         <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                             <Button x:Name="PlugInDevice" Height="20" Margin="0,0,0,0" Click="PlugInDevice_Click">Podłącz telefon</Button>
                             <Button x:Name="StartSMSSubscription" Height="30" IsEnabled="False" Click="StartSubscription_Click">Subskrybuj</Button>
@@ -66,7 +66,7 @@
                     <StackPanel>
                         <TextBox x:Name="insertEmailBox" Height="30" FontSize="20" Text="Wpisz adres e-mail..." GotMouseCapture="insertEmailBox_GotMouseCapture"
                                  TextChanged="insertEmailBox_TextChanged"></TextBox>
-                        <Button x:Name="ConfirmMailButton" Height="30" IsEnabled="False">Błędny adres e-mail!</Button>
+                        <Button x:Name="ConfirmMailButton" Height="30" IsEnabled="False" Click="ConfirmMailButton_Click">Błędny adres e-mail!</Button>
                         <Button x:Name="StartEmailSubscription" Height="30" IsEnabled="False">Subskrybuj</Button>
                     </StackPanel>
                 </Grid>

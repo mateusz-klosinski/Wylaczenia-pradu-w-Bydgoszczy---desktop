@@ -36,7 +36,7 @@ namespace EneaWPF
         public string Time { get;  set; }
         public string Details { get; set; }
 
-        public int? PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         public string EmailAddress { get; set; }
 
         private DateTime lastUpdate;

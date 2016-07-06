@@ -98,9 +98,12 @@ namespace EneaWPF
             if (phone.COMCheck() == true)
             {
                 MessageBox.Show("Znaleiono urządzenie");
-                StartSMSSubscription.IsEnabled = true;
                 PlugInDevice.IsEnabled = false;
                 PlugInDevice.Content = "Podłączono telefon";
+
+                if (manager.PhoneNumber != string.Empty)
+                    StartSMSSubscription.IsEnabled = true;
+
             }
             else MessageBox.Show("Nie znaleziono urządzenia");
 
@@ -155,11 +158,13 @@ namespace EneaWPF
             {
                 ConfirmMailButton.IsEnabled = true;
                 ConfirmMailButton.Content = "Zatwierdź";
+                StartEmailSubscription.IsEnabled = false;
             }
             else if (ConfirmMailButton != null)
             {
                 ConfirmMailButton.IsEnabled = false;
                 ConfirmMailButton.Content = "Błędny adres e-mail!";
+                StartEmailSubscription.IsEnabled = false;
             }
 
         }
@@ -178,6 +183,21 @@ namespace EneaWPF
                 ConfirmPhoneNumberButton.Content = "Błędny numer telefonu!";
             }
 
+        }
+
+        private void ConfirmPhoneNumberButton_Click(object sender, RoutedEventArgs e)
+        {
+            manager.PhoneNumber = insertNumberBox.Text;
+            ConfirmPhoneNumberButton.IsEnabled = false;
+            ConfirmPhoneNumberButton.Content = "Zatwierdzono";
+        }
+
+        private void ConfirmMailButton_Click(object sender, RoutedEventArgs e)
+        {
+            manager.EmailAddress = insertEmailBox.Text;
+            ConfirmMailButton.IsEnabled = false;
+            ConfirmMailButton.Content = "Zatwierdzono";
+            StartEmailSubscription.IsEnabled = true;
         }
     }
 }
