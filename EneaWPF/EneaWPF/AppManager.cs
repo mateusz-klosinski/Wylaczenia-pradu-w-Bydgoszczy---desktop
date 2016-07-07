@@ -16,7 +16,8 @@ namespace EneaWPF
     {
 
         DispatcherTimer timer = new DispatcherTimer();
-        HandleEmail email = new HandleEmail("smtp.gmail.com", 587);
+        public HandlePhone phone = new HandlePhone();
+
 
         private string downloadedData;
         private List<string> downloadedDataList = new List<string>();
@@ -68,6 +69,10 @@ namespace EneaWPF
         {
             toNextUpdate -= TimeSpan.FromMinutes(1);
             OnPropertyChanged("ToNextUpdate");
+            if (toNextUpdate == TimeSpan.Zero)
+            {
+                UpdateData();
+            }
         }
 
         private void OnPropertyChanged(string propertyName)
@@ -129,7 +134,12 @@ namespace EneaWPF
 
             if (isEmailSubscriptionRunning)
             {
+                HandleEmail email = new HandleEmail("smtp.gmail.com", 587);
                 email.sendMail(generateEmailSubject(), generateEmailString(), EmailAddress);
+            }
+            if (isSMSSubscriptionRunning)
+            {
+                phone.SendSMS(generateSMSString(), PhoneNumber);
             }
         }
 
@@ -236,6 +246,7 @@ namespace EneaWPF
             }
             else
             {
+                email += "Dzisiaj: " + Environment.NewLine;
                 foreach (var disconnection in todayDisconnectionList)
                 {
                     email += disconnection.Area + Environment.NewLine;
@@ -250,6 +261,7 @@ namespace EneaWPF
             }
             else
             {
+                email += "Jutro: " + Environment.NewLine;
                 foreach (var disconnection in tomorrowDisconnectionList)
                 {
                     email += disconnection.Area + Environment.NewLine;

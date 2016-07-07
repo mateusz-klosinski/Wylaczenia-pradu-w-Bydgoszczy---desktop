@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EneaWPF"
         mc:Ignorable="d"
-        Title="Przerwy w dostawach prądu - Enea" Height="500" Width="950" MaxHeight="500" MinHeight="500" MinWidth="700" Background="#FFD7D7D8">
+        Title="Przerwy w dostawach prądu - Enea" Height="500" Width="970" MaxHeight="500" MinHeight="500" MinWidth="700" Background="#FFD7D7D8">
 
 
 

@@ -24,18 +24,14 @@ namespace EneaWPF
     {
         DispatcherTimer timer = new DispatcherTimer();
         AppManager manager;
-        HandlePhone phone;
-
-
         bool isPhoneHandled = false;
-
 
 
         public MainWindow()
         {
             InitializeComponent();
             manager = new AppManager();
-            phone = new HandlePhone();
+
             grid.DataContext = manager;
 
             timer.Interval = TimeSpan.FromSeconds(0.5);
@@ -103,7 +99,7 @@ namespace EneaWPF
 
         private void PlugInDevice_Click(object sender, RoutedEventArgs e)
         {
-            if (phone.COMCheck() == true)
+            if (manager.phone.COMCheck() == true)
             {
                 MessageBox.Show("Znaleiono urządzenie");
                 PlugInDevice.IsEnabled = false;
@@ -200,12 +196,21 @@ namespace EneaWPF
 
         private void StartSubscription_Click(object sender, RoutedEventArgs e)
         {
-            SubscriptionIsOffTextBlock.Visibility = Visibility.Collapsed;
-            SubscriptionIsOnTextBlock.Visibility = Visibility.Visible;
-            StartSMSSubscription.Visibility = Visibility.Collapsed;
-            EndSMSSubscription.Visibility = Visibility.Visible;
+            if (!manager.isEmailSubscriptionRunning)
+            {
+                SubscriptionIsOffTextBlock.Visibility = Visibility.Collapsed;
+                SubscriptionIsOnTextBlock.Visibility = Visibility.Visible;
+                StartSMSSubscription.Visibility = Visibility.Collapsed;
+                EndSMSSubscription.Visibility = Visibility.Visible;
 
-            manager.isSMSSubscriptionRunning = true;
+                manager.isSMSSubscriptionRunning = true;
+                manager.UpdateData();
+            }
+            else
+            {
+                MessageBox.Show("Nie można zacząć subskrypcji w trakcie trwania innej");
+            }
+
         }
 
         private void EndSubscription_Click(object sender, RoutedEventArgs e)
@@ -220,13 +225,20 @@ namespace EneaWPF
 
         private void StartEmailSubscription_Click(object sender, RoutedEventArgs e)
         {
-            EmailSubscriptionIsOffTextBlock.Visibility = Visibility.Collapsed;
-            EmailSubscriptionIsOnTextBlock.Visibility = Visibility.Visible;
-            StartEmailSubscription.Visibility = Visibility.Collapsed;
-            EndEmailSubscription.Visibility = Visibility.Visible;
+            if (!manager.isSMSSubscriptionRunning)
+            {
+                EmailSubscriptionIsOffTextBlock.Visibility = Visibility.Collapsed;
+                EmailSubscriptionIsOnTextBlock.Visibility = Visibility.Visible;
+                StartEmailSubscription.Visibility = Visibility.Collapsed;
+                EndEmailSubscription.Visibility = Visibility.Visible;
+                manager.isEmailSubscriptionRunning = true;
+                manager.UpdateData();
+            }
+            else
+            {
+                MessageBox.Show("Nie można rozpocząć subskrypcji w trakcie trwania innej.");
+            }
 
-            manager.isEmailSubscriptionRunning = true;
-            manager.UpdateData();
         }
 
         private void EndEmailSubscription_Click(object sender, RoutedEventArgs e)
