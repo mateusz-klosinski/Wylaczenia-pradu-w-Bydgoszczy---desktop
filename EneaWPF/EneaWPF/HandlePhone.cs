@@ -6,16 +6,12 @@ using System.Threading.Tasks;
 using GsmComm.GsmCommunication;
 using System.IO.Ports;
 using GsmComm.PduConverter;
+using GsmComm.PduConverter.SmartMessaging;
 
 namespace EneaWPF
 {
     class HandlePhone
     {
-        /*
-        Akcesory dodałem gdyby była potrzeba ręcznego zdefiniowania numeru portu COM i instanacji GsmCommMain.
-        Przy automatycznym szukaniu wystarczy wywyołać COMCheck() która sama przypisze polom klasy odpowiednią wartość.        
-        */
-
         private static string _COMPORT;
         public static string comPort
         {
@@ -87,15 +83,35 @@ namespace EneaWPF
             set { if (value == null) throw new ArgumentNullException(); _PHONENUMBERS = value; }
         }
 
-
+        public static IEnumerable<string> SplitByLength(string s, int length)
+        {
+            for (int i = 0; i < s.Length; i += length)
+            {
+                if (i + length <= s.Length)
+                {
+                    yield return s.Substring(i, length);
+                }
+                else
+                {
+                    yield return s.Substring(i);
+                }
+            }
+        }
 
         public void SendSMS(string textMessage, string number)
         {
-            SmsSubmitPdu SMS = new SmsSubmitPdu(textMessage, number);
-            if (!_MYPHONE.IsOpen()) _MYPHONE.Open();
-            _MYPHONE.SendMessage(SMS);
-            _MYPHONE.Close();
+            IEnumerable<string> NewDividedMessage = SplitByLength(textMessage, 70);
 
+            foreach (string VARIABLE in NewDividedMessage)
+            {
+                byte DCS = (byte)DataCodingScheme.GeneralCoding.Alpha16Bit;
+                SmsSubmitPdu SMS = new SmsSubmitPdu(VARIABLE, number, DCS);
+
+                if (!_MYPHONE.IsOpen()) _MYPHONE.Open();
+
+                _MYPHONE.SendMessage(SMS);
+                _MYPHONE.Close();
+            }
         }
     }
 }
