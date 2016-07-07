@@ -16,6 +16,7 @@ namespace EneaWPF
     {
 
         DispatcherTimer timer = new DispatcherTimer();
+        HandleEmail email = new HandleEmail("smtp.gmail.com", 587);
 
         private string downloadedData;
         private List<string> downloadedDataList = new List<string>();
@@ -125,6 +126,11 @@ namespace EneaWPF
             OnPropertyChanged("TodayDisconnectionList");
             OnPropertyChanged("TommorowDisconnectionList");
             OnPropertyChanged("ElseDisconnectionList");
+
+            if (isEmailSubscriptionRunning)
+            {
+                email.sendMail(generateEmailSubject(), generateEmailString(), EmailAddress);
+            }
         }
 
         public void updateDetails(Disconnection disconnection)
@@ -210,6 +216,62 @@ namespace EneaWPF
                     elseDisconnectionList.Add(disconnection);
             }
 
+        }
+
+        private string generateEmailSubject()
+        {
+            return "Planowane wyłączenia w dniach " + DateTime.Now.ToShortDateString() + ", "
+                + (DateTime.Now + TimeSpan.FromDays(1)).ToShortDateString() + ".";
+        }
+
+
+        private string generateEmailString()
+        {
+            string email = "Planowane wyłączenia w dniach " + DateTime.Now.ToShortDateString() + ", "
+                + (DateTime.Now + TimeSpan.FromDays(1)).ToShortDateString() + Environment.NewLine + Environment.NewLine;
+
+            if (todayDisconnectionList.Count == 0)
+            {
+                email += "Brak wyłączeń w dniu dzisiejszym." + Environment.NewLine + Environment.NewLine;
+            }
+            else
+            {
+                foreach (var disconnection in todayDisconnectionList)
+                {
+                    email += disconnection.Area + Environment.NewLine;
+                    email += disconnection.Time + Environment.NewLine;
+                    email += disconnection.Details + Environment.NewLine + Environment.NewLine;
+                }
+            }
+
+            if (tomorrowDisconnectionList.Count == 0)
+            {
+                email += "Brak wyłączeń w dniu jutrzejszym." + Environment.NewLine + Environment.NewLine;
+            }
+            else
+            {
+                foreach (var disconnection in tomorrowDisconnectionList)
+                {
+                    email += disconnection.Area + Environment.NewLine;
+                    email += disconnection.Time + Environment.NewLine;
+                    email += disconnection.Details + Environment.NewLine + Environment.NewLine;
+                }
+            }
+            email += Environment.NewLine + Environment.NewLine + Environment.NewLine;
+            email += "E-mail wygenerowany automatycznie przez program, prosimy nie odpowiadać!";
+
+            return email;
+        }
+
+        private string generateSMSString()
+        {
+            string sms = "Planowane wylaczenia jutro w okolicach: " + Environment.NewLine;
+            foreach (var disconnection in tomorrowDisconnectionList)
+            {
+                sms += disconnection.Area + Environment.NewLine;
+            }
+            sms += "Po więcej szczegolow zapraszamy na ekran aplikacji.";
+            return sms;
         }
 
     }

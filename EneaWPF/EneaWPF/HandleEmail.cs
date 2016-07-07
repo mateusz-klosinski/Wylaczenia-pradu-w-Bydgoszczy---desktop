@@ -24,9 +24,9 @@ namespace EneaWPF
         {
             using (var client = new SmtpClient(server, port))
             {
+                client.UseDefaultCredentials = false;
                 client.Credentials = new System.Net.NetworkCredential("przerwywdostawach@gmail.com", "eneaoperator123");
                 client.EnableSsl = true;
-                client.UseDefaultCredentials = false;
 
                 using (var mail = new MailMessage("przerwywdostawachpradu@gmail.com", to, subject, message))
                 {

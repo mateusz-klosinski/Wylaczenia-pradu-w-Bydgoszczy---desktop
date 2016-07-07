@@ -226,6 +226,7 @@ namespace EneaWPF
             EndEmailSubscription.Visibility = Visibility.Visible;
 
             manager.isEmailSubscriptionRunning = true;
+            manager.UpdateData();
         }
 
         private void EndEmailSubscription_Click(object sender, RoutedEventArgs e)
