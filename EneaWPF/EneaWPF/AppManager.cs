@@ -207,7 +207,8 @@ namespace EneaWPF
         private void makeDisconnectionLists()
         {
             ObservableCollection<Disconnection> DisconnectionsList = new ObservableCollection<Disconnection>();
-            for (int i = 0; i < downloadedDataList.Count; i+=3)
+            int count = downloadedDataList.Count % 3 == 0 ? downloadedDataList.Count : downloadedDataList.Count - 1;
+            for (int i = 0; i < count; i+=3)
             {
                 DisconnectionsList.Add(new Disconnection(downloadedDataList[i], downloadedDataList[i + 1], downloadedDataList[i + 2]));
             }
